@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  charging-station-recommendation-redis:
+    container_name: charging-station-recommendation-redis
+    build:
+      dockerfile: Dockerfile
+      context: ./redis
+    image: dbstn322/charging-station-recommendation-redis
+    ports:
+      - "6379:6379"
+  charging-station-recommendation-database:
+    container_name: charging-station-recommendation-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: dbstn322/charging-station-recommendation-database
+    environment:
+      - MARIADB_DATABASE=charging-station-recommendation
+      - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./database/config:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"
+
