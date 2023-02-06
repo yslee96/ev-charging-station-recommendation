@@ -34,7 +34,7 @@ public class CsvUtils {
 
 
             return ChargingStationDto.builder()
-                    .chargingStationName(rowList.get(1) )
+                    .chargingStationName(rowList.get(1))
                     .latitude(Double.parseDouble(rowList.get(2)))
                     .longitude(Double.parseDouble(rowList.get(3)))
                     .build();

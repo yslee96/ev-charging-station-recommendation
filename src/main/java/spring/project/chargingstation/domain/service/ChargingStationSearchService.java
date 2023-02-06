@@ -3,6 +3,7 @@ package spring.project.chargingstation.domain.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import spring.project.chargingstation.domain.cache.ChargingStationRedisTemplateService;
 import spring.project.chargingstation.domain.dto.ChargingStationDto;
 import spring.project.chargingstation.domain.entity.ChargingStation;
 
@@ -15,10 +16,13 @@ import java.util.stream.Collectors;
 public class ChargingStationSearchService {
 
     private final ChargingStationRepositoryService chargingStationRepositoryService;
+    private final ChargingStationRedisTemplateService chargingStationRedisTemplateService;
 
     public List<ChargingStationDto> searchChargingStationDtoList(){
 
         //redis
+        List<ChargingStationDto> chargingStationDtoList = chargingStationRedisTemplateService.findAll();
+        if(!chargingStationDtoList.isEmpty()) return chargingStationDtoList;
 
         //db
         return chargingStationRepositoryService.findAll()
