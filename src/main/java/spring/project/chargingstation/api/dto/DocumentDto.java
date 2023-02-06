@@ -2,10 +2,12 @@ package spring.project.chargingstation.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocumentDto {
@@ -17,6 +19,5 @@ public class DocumentDto {
     private double latitude;
     @JsonProperty("x")
     private double longitude;
-
 
 }

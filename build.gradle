@@ -27,6 +27,14 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// short URL
+	// https://github.com/seruco/base62
+	implementation 'io.seruco.encoding:base62:0.1.3'
+
+	// handlebars
+	implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.4'
+
 	// spock
 	testImplementation('org.spockframework:spock-core:2.1-groovy-3.0')
 	testImplementation('org.spockframework:spock-spring:2.1-groovy-3.0')
@@ -36,6 +44,17 @@ dependencies {
 	// testcontainers
 	testImplementation 'org.testcontainers:spock:1.17.1'
 	testImplementation 'org.testcontainers:mariadb:1.17.1'
+
+	//openCSV
+	implementation 'com.opencsv:opencsv:5.5'
+
+	// spring retry
+	implementation 'org.springframework.retry:spring-retry'
+
+	// mockWebServer
+	testImplementation('com.squareup.okhttp3:okhttp:4.10.0')
+	testImplementation('com.squareup.okhttp3:mockwebserver:4.10.0')
+
 }
 
 tasks.named('test') {

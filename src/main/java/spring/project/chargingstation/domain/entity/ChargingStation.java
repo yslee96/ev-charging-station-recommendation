@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.project.chargingstation.BaseTimeEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,16 +16,14 @@ import javax.persistence.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChargingStation {
+public class ChargingStation extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String chargingStationName;
-    private String chargingStationAddress;
     private double latitude;
     private double longitude;
-
 
 }
