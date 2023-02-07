@@ -46,5 +46,12 @@ public class KakaoAddressSearchService {
         return restTemplate.exchange(uri, HttpMethod.GET, httpEntity, KakaoApiResponseDto.class).getBody();
 
     }
+
+    @Recover
+    public KakaoApiResponseDto recover(RuntimeException e, String address) {
+        log.error("All the retries failed. address: {}, error: {}", address, e.getMessage());
+        return null;
+    }
+
 }
 

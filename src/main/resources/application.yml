@@ -46,3 +46,20 @@ spring:
   config:
     activate:
       on-profile: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://charging-station-recommendation-database:3306/charging-station-recommendation
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  redis:
+    host: charging-station-recommendation-redis
+    port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: validate # prod 배포시 validate
+    show-sql: true
+
+charging-station:
+  recommendation:
+    base:
+      url: http://43.200.241.118/dir/ # aws ec2 ip 할당

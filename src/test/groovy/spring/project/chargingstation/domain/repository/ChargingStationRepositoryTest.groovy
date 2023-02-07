@@ -18,13 +18,11 @@ class ChargingStationRepositoryTest extends AbstractIntegrationContainerBaseTest
     }
 
     def "chargingStationRepository save"(){
-        String address = "서울 특별시 성북구 안암동"
         String name = "고려대학교"
         double latitude = 37.59
         double longitude = 127.03
 
         def chargingStation = ChargingStation.builder()
-                .chargingStationAddress(address)
                 .chargingStationName(name)
                 .latitude(latitude)
                 .longitude(longitude)
@@ -34,20 +32,17 @@ class ChargingStationRepositoryTest extends AbstractIntegrationContainerBaseTest
         def result = chargingStationRepository.save(chargingStation)
 
         then:
-        result.getChargingStationAddress() == address
         result.getChargingStationName() == name
         result.getLatitude() == latitude
         result.getLongitude() == longitude
     }
 
     def "chargingStationRepository saveAll"() {
-        String address = "서울 특별시 성북구 안암동"
         String name = "고려대학교"
         double latitude = 37.59
         double longitude = 127.03
 
         def chargingStation = ChargingStation.builder()
-                .chargingStationAddress(address)
                 .chargingStationName(name)
                 .latitude(latitude)
                 .longitude(longitude)
@@ -64,11 +59,9 @@ class ChargingStationRepositoryTest extends AbstractIntegrationContainerBaseTest
     def "BaseTimeEntity 등록"(){
         given:
         LocalDateTime now = LocalDateTime.now()
-        String address = "서울 특별시 성북구 안암동"
         String name = "고려대학교"
 
         def chargingStation = ChargingStation.builder()
-                .chargingStationAddress(address)
                 .chargingStationName(name)
                 .build()
 

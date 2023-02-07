@@ -38,7 +38,7 @@ public class ChargingStationController {
 
     public void saveCsvToRedis() {
 
-        List<ChargingStationDto> pharmacyDtoList = chargingStationRepositoryService.findAll()
+        List<ChargingStationDto> chargingStationDtoList = chargingStationRepositoryService.findAll()
                 .stream().map(chargingStation -> ChargingStationDto.builder()
                         .id(chargingStation.getId())
                         .chargingStationName(chargingStation.getChargingStationName())
@@ -47,7 +47,7 @@ public class ChargingStationController {
                         .build())
                 .collect(Collectors.toList());
 
-        pharmacyDtoList.forEach(chargingStationRedisTemplateService::save);
+        chargingStationDtoList.forEach(chargingStationRedisTemplateService::save);
 
     }
 

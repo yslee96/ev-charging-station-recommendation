@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  charging-station-recommendation-redis:
+    container_name: charging-station-recommendation-redis
+    build:
+      dockerfile: Dockerfile
+      context: ./redis
+    image: dbstn322/charging-station-recommendation-redis
+    ports:
+      - "6379:6379"
+  charging-station-recommendation-database:
+    container_name: charging-station-recommendation-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: dbstn322/charging-station-recommendation-database
+    environment:
+      - MARIADB_DATABASE=charging-station-recommendation
+      - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./database/config:/etc/mysql/conf.d
+      - ./database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+  charging-station-recommendation-app:
+    container_name: charging-station-recommendation-app
+    build: .
+    depends_on: # DB, REDIS 컨테이너가 실행된 다음 WEB을 실행시킨다.
+      - charging-station-recommendation-database
+      - charging-station-recommendation-redis
+    image: dbstn322/charging-station-recommendation-app
+    environment:
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - KAKAO_REST_API_KEY=${KAKAO_REST_API_KEY}
+    ports:
+      - "80:8080"
+    restart: always

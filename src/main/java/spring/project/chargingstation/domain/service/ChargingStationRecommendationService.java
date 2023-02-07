@@ -29,7 +29,7 @@ public class ChargingStationRecommendationService {
     private final Base62Service base62Service;
 
     private static final String ROAD_VIEW_BASE_URL = "https://map.kakao.com/link/roadview/";
-    @Value("${charging_station.recommendation.base.url}")
+    @Value("${charging-station.recommendation.base.url}")
     private String baseUrl;
 
     public List<OutputDto> RecommendChargingStationList(String address){
